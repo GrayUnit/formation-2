@@ -9,7 +9,7 @@ import { UiComponent } from './components/ui/ui.component';
   declarations: [UiComponent],
   imports: [
     CommonModule,
-    IconsModule
+    IconsModule,
   ],
   exports: [
     UiComponent
