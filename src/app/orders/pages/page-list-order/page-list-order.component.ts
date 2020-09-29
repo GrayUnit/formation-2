@@ -10,15 +10,27 @@ import { OrdersService } from '../../services/orders.service';
 export class PageListOrderComponent implements OnInit {
 
   public ordersList: Order[];
+  public tableHeaders: string[];
 
   constructor(private orderService: OrdersService) { }
 
   ngOnInit(): void {
     this.orderService.collection.subscribe(
       (datas) => {
-        this.ordersList = datas;
+        setTimeout(() => {
+          this.ordersList = datas;
+        }, 10000);
       }
-    )
+    );
+    this.tableHeaders = [
+      "Type",
+      "Client",
+      "Nb. Jours",
+      "Tjm HT",
+      "Total HT",
+      "Total TTC",
+      "State"
+    ]
   }
 
 }
