@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Order } from 'src/app/shared/models/order';
 import { environment } from 'src/environments/environment';
+import { StateOrder } from '../enums/state-order.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,16 @@ export class OrdersService {
 
   set collection(col: Observable<Order[]>) {
     this.pCollection = col;
+  }
+
+  public changeState(item: Order, state: StateOrder) {
+    const obj = new Order({...item});
+    obj.state = state;
+    return this.updateItem(obj);
+  }
+
+  public updateItem(item: Order): Observable<Order> {
+    return this.http.put<Order>(`${this.urlApi}orderss/${item.id}`, item);
   }
 
 }
