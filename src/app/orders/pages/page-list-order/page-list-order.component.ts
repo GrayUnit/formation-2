@@ -17,9 +17,7 @@ export class PageListOrderComponent implements OnInit {
   ngOnInit(): void {
     this.orderService.collection.subscribe(
       (datas) => {
-        setTimeout(() => {
-          this.ordersList = datas;
-        }, 10000);
+        this.ordersList = datas;
       }
     );
     this.tableHeaders = [
