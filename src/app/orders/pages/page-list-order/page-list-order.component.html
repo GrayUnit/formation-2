@@ -1,4 +1,4 @@
-<app-table-light [headers]="tableHeaders" *ngIf="ordersList">
+<app-table-light [headers]="tableHeaders" *ngIf="collectionOrders$ | async as ordersList">
   <tr *ngFor="let order of ordersList">
     <td>{{ order.typePresta }}</td>
     <td>{{ order.client | uppercase | lowercase }}</td>
@@ -17,9 +17,9 @@
     </td>
   </tr>
 </app-table-light>
-<div *ngIf="!ordersList">
+<!-- <div *ngIf="!ordersList">
   Chargement des données....
-</div>
+</div> -->
 
 <app-btn href="http://www.google.com" label="Aller sur google"></app-btn>
 <app-btn route="/clients" label="Aller sur la page client"></app-btn>
