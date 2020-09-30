@@ -20,3 +20,7 @@
 <div *ngIf="!ordersList">
   Chargement des données....
 </div>
+
+<app-btn href="http://www.google.com" label="Aller sur google"></app-btn>
+<app-btn route="/clients" label="Aller sur la page client"></app-btn>
+<app-btn [action]="true" label="Test Action" (clicked)="testButton()"></app-btn>

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Order } from 'src/app/shared/models/order';
+import { Order } from 'src/app/core/models/order';
 import { environment } from 'src/environments/environment';
 import { StateOrder } from '../enums/state-order.enum';
 
@@ -39,7 +39,7 @@ export class OrdersService {
   }
 
   public updateItem(item: Order): Observable<Order> {
-    return this.http.put<Order>(`${this.urlApi}orderss/${item.id}`, item);
+    return this.http.put<Order>(`${this.urlApi}orders/${item.id}`, item);
   }
 
 }
