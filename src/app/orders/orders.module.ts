@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
+import { TemplatesModule } from '../templates/templates.module';
 import { OrdersRoutingModule } from './orders-routing.module';
 import { PageListOrderComponent } from './pages/page-list-order/page-list-order.component';
 import { TotalPipe } from './pipes/total.pipe';
@@ -12,7 +13,8 @@ import { TotalPipe } from './pipes/total.pipe';
   imports: [
     CommonModule,
     OrdersRoutingModule,
-    SharedModule
+    SharedModule,
+    TemplatesModule,
   ]
 })
 export class OrdersModule { }

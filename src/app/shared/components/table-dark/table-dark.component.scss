@@ -1,7 +1,7 @@
 @import 'theme';
 
 app-template-a {
-  .table-light {
+  .table-dark {
     .state-cancel {
       background-color: $color-error;
     }
@@ -21,7 +21,8 @@ app-template-a {
 }
 
 app-template-b {
-  .table-light {
+  .table-dark {
+    color: $color2;
     .state-cancel {
       background-color: $color-error;
     }
@@ -39,3 +40,6 @@ app-template-b {
     }
   }
 }
+
+
+

@@ -1,26 +1,57 @@
-<app-table-light [headers]="tableHeaders" *ngIf="collectionOrders$ | async as ordersList">
-  <tr *ngFor="let order of ordersList">
-    <td>{{ order.typePresta }}</td>
-    <td>{{ order.client | uppercase | lowercase }}</td>
-    <td>{{ order.nbJours }}</td>
-    <td>{{ order.tjmHt | currency: 'EUR' }}</td>
-    <td>{{ order | total | currency: 'EUR' }}</td>
-    <td>{{ order | total: 'ttc' | currency: 'EUR' }}</td>
-    <td appState [state]="order.state">
-      <select (change)="changeState(order, $event)">
-        <option *ngFor="let state of states"
-                [value]="state"
-                [selected]="state == order.state">
-          {{ state }}
-        </option>
-      </select>
-    </td>
-  </tr>
-</app-table-light>
-<!-- <div *ngIf="!ordersList">
-  Chargement des données....
-</div> -->
+<app-template-a title="Commandes" subtitle="Liste">
+  <app-table-dark class="main-content" [headers]="tableHeaders" *ngIf="collectionOrders$ | async as ordersList">
+    <tr *ngFor="let order of ordersList">
+      <td>{{ order.typePresta }}</td>
+      <td>{{ order.client | uppercase | lowercase }}</td>
+      <td>{{ order.nbJours }}</td>
+      <td>{{ order.tjmHt | currency: 'EUR' }}</td>
+      <td>{{ order | total | currency: 'EUR' }}</td>
+      <td>{{ order | total: 'ttc' | currency: 'EUR' }}</td>
+      <td appState [state]="order.state">
+        <select (change)="changeState(order, $event)">
+          <option *ngFor="let state of states"
+                  [value]="state"
+                  [selected]="state == order.state">
+            {{ state }}
+          </option>
+        </select>
+      </td>
+    </tr>
+  </app-table-dark>
+  <!-- <div *ngIf="!ordersList">
+    Chargement des données....
+  </div> -->
+  <div class="button-group">
+    <app-btn href="http://www.google.com" label="Aller sur google"></app-btn>
+    <app-btn route="/clients" label="Aller sur la page client"></app-btn>
+    <app-btn [action]="true" label="Test Action" (clicked)="testButton()"></app-btn>
+  </div>
+</app-template-a>
+<app-template-b title="Commandes">
+  <app-table-dark [headers]="tableHeaders" *ngIf="collectionOrders$ | async as ordersList">
+    <tr *ngFor="let order of ordersList">
+      <td>{{ order.typePresta }}</td>
+      <td>{{ order.client | uppercase | lowercase }}</td>
+      <td>{{ order.nbJours }}</td>
+      <td>{{ order.tjmHt | currency: 'EUR' }}</td>
+      <td>{{ order | total | currency: 'EUR' }}</td>
+      <td>{{ order | total: 'ttc' | currency: 'EUR' }}</td>
+      <td appState [state]="order.state">
+        <select (change)="changeState(order, $event)">
+          <option *ngFor="let state of states"
+                  [value]="state"
+                  [selected]="state == order.state">
+            {{ state }}
+          </option>
+        </select>
+      </td>
+    </tr>
+  </app-table-dark>
+  <!-- <div *ngIf="!ordersList">
+    Chargement des données....
+  </div> -->
 
-<app-btn href="http://www.google.com" label="Aller sur google"></app-btn>
-<app-btn route="/clients" label="Aller sur la page client"></app-btn>
-<app-btn [action]="true" label="Test Action" (clicked)="testButton()"></app-btn>
+  <app-btn href="http://www.google.com" label="Aller sur google"></app-btn>
+  <app-btn route="/clients" label="Aller sur la page client"></app-btn>
+  <app-btn [action]="true" label="Test Action" (clicked)="testButton()"></app-btn>
+</app-template-b>

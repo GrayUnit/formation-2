@@ -38,7 +38,7 @@ export class PageListOrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    //this.subscription.unsubscribe();
   }
 
   public changeState(item: Order, event) {

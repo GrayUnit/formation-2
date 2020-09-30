@@ -2,7 +2,7 @@
   "orders": [
     {
       "nbJours": 1,
-      "state": "In Progress",
+      "state": "Cancel",
       "tjmHt": 1200,
       "tva": 20,
       "typePresta": "formation55",
@@ -22,7 +22,7 @@
     },
     {
       "nbJours": 5,
-      "state": "Confirm",
+      "state": "In Progress",
       "tjmHt": 700,
       "tva": 20,
       "typePresta": "Formation",
