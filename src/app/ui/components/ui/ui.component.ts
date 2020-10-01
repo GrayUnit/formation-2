@@ -15,8 +15,13 @@ export class UiComponent implements OnInit {
     this.menuIsOpen = false;
   }
 
-  public toggleMenu() {
-    this.menuIsOpen = !this.menuIsOpen;
+  public toggleMenu(value?: boolean) {
+    console.log("toogle");
+    if(value != undefined) {
+      this.menuIsOpen = value
+    } else {
+      this.menuIsOpen = !this.menuIsOpen;
+    }
   }
 
 }

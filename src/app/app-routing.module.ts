@@ -23,6 +23,7 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, {
     preloadingStrategy: PreloadAllModules,
     enableTracing: false,
+    onSameUrlNavigation: 'reload'
   })],
   exports: [RouterModule]
 })

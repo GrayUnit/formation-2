@@ -30,6 +30,7 @@ export class PageListClientComponent implements OnInit {
       'Commentaire',
       'State'
     ];
+    console.log("test");
   }
 
   public changeState(item: Client, event) {

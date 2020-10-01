@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Order } from 'src/app/core/models/order';
 import { StateOrder } from '../../enums/state-order.enum';
@@ -17,7 +18,9 @@ export class PageListOrderComponent implements OnInit, OnDestroy {
   public states = Object.values(StateOrder);
   public subscription: Subscription;
 
-  constructor(private orderService: OrdersService) { }
+  constructor(
+    private orderService: OrdersService,
+    private router: Router) { }
 
   ngOnInit(): void {
     // this.subscription = this.orderService.collection.subscribe(
@@ -25,6 +28,7 @@ export class PageListOrderComponent implements OnInit, OnDestroy {
     //     this.orders = datas;
     //   }
     // );
+    this.router.routeReuseStrategy.shouldReuseRoute = () => { return false };
     this.collectionOrders$ = this.orderService.collection;
     this.tableHeaders = [
       "Type",
@@ -54,6 +58,8 @@ export class PageListOrderComponent implements OnInit, OnDestroy {
   }
 
   public testButton() {
-    alert("Click sur le boutton !");
+
   }
+
+
 }

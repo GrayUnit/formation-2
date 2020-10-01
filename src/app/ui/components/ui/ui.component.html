@@ -11,7 +11,7 @@
       <ng-content select="app-nav"></ng-content>
     </div>
   </aside>
-  <div class="page">
+  <div class="page" (click)="toggleMenu(false)">
     <div class="contents">
       <ng-content select=".content"></ng-content>
     </div>
