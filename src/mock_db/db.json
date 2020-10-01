@@ -68,14 +68,16 @@
       "tva": 20,
       "id": 1,
       "ca": 12000,
-      "comment": "un comment pour client christophe2"
+      "comment": "un comment pour client christophe2",
+      "phoneNumber": "06 27 23 29 94"
     },
     {
       "name": "Modis",
       "state": "Inactive",
       "id": 2,
       "ca": 120000,
-      "comment": "un comment pour client modis"
+      "comment": "un comment pour client modis",
+      "phoneNumber": "06 27 23 29 94"
     }
   ]
 }

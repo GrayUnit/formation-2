@@ -32,10 +32,6 @@ export class FormOrderComponent implements OnInit {
     }, {validators: Validators.compose([DependencyValidator("client", ["tjmHt", "nbJours"])])});
   }
 
-  test() {
-    debugger;
-  }
-
   public onSubmit() {
     this.submitted.emit(this.form.value);
   }
