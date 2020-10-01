@@ -37,7 +37,8 @@ export class PageListOrderComponent implements OnInit, OnDestroy {
       "Tjm HT",
       "Total HT",
       "Total TTC",
-      "State"
+      "State",
+      "Actions"
     ]
   }
 
@@ -61,5 +62,8 @@ export class PageListOrderComponent implements OnInit, OnDestroy {
 
   }
 
+  public edit(item: Order) {
+    this.router.navigate(['orders', 'edit', item.id]);
+  }
 
 }

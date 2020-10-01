@@ -11,7 +11,7 @@ import { StateClient } from '../../enums/state-client.enum';
 export class FormClientComponent implements OnInit {
 
   public form: FormGroup;
-  public state = Object.values(StateClient);
+  public states = Object.values(StateClient);
   @Input() public client: Client = new Client();
   @Output() public submitted: EventEmitter<Client> = new EventEmitter();
   constructor(private formB: FormBuilder) { }
