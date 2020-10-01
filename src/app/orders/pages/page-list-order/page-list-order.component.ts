@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { Order } from 'src/app/core/models/order';
 import { StateOrder } from '../../enums/state-order.enum';
 import { OrdersService } from '../../services/orders.service';
@@ -14,20 +15,16 @@ export class PageListOrderComponent implements OnInit, OnDestroy {
 
   public orders: Order[];
   public collectionOrders$: Observable<Order[]>;
+  public destroy$: Subject<boolean> = new Subject();
   public tableHeaders: string[];
   public states = Object.values(StateOrder);
-  public subscription: Subscription;
 
   constructor(
     private orderService: OrdersService,
     private router: Router) { }
 
   ngOnInit(): void {
-    // this.subscription = this.orderService.collection.subscribe(
-    //   (datas) => {
-    //     this.orders = datas;
-    //   }
-    // );
+    this.orderService.refresh$.next(true);
     this.router.routeReuseStrategy.shouldReuseRoute = () => { return false };
     this.collectionOrders$ = this.orderService.collection;
     this.tableHeaders = [
@@ -43,23 +40,33 @@ export class PageListOrderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    //this.subscription.unsubscribe();
+    this.destroy$.next(true);
   }
 
   public changeState(item: Order, event) {
-    this.orderService.changeState(item, event.target.value).subscribe(
+    this.orderService.changeState(item, event.target.value)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
       (result) => {
         item.state = result.state;
       }, (err) => {
         event.target.value = item.state;
       }
     );
-
-
   }
 
   public testButton() {
 
+  }
+
+  public deleteOrder(item: Order) {
+    this.orderService.deleteItem(item)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
+      (result) => {
+        this.orderService.refresh$.next(true);
+      }
+    );
   }
 
   public edit(item: Order) {

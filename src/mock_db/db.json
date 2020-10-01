@@ -2,16 +2,6 @@
   "orders": [
     {
       "nbJours": 1,
-      "state": "Cancel",
-      "tjmHt": 1200,
-      "tva": 20,
-      "typePresta": "formation55",
-      "client": "M2i",
-      "comment": "merci m2i",
-      "id": 1
-    },
-    {
-      "nbJours": 1,
       "state": "Confirm",
       "tjmHt": 500,
       "tva": 20,
@@ -19,46 +9,6 @@
       "client": "nemesys",
       "comment": "fssdgh",
       "id": 3
-    },
-    {
-      "nbJours": 5,
-      "state": "In Progress",
-      "tjmHt": 700,
-      "tva": 20,
-      "typePresta": "Formation",
-      "client": "Atos",
-      "comment": "Comment pour Atos",
-      "id": 4
-    },
-    {
-      "tjmHt": "500",
-      "nbJours": 1,
-      "tva": null,
-      "state": "In Progress",
-      "typePresta": "typetesting",
-      "client": "f212121212",
-      "comment": null,
-      "id": 5
-    },
-    {
-      "tjmHt": null,
-      "nbJours": 1,
-      "tva": null,
-      "state": "In Progress",
-      "typePresta": null,
-      "client": null,
-      "comment": null,
-      "id": 6
-    },
-    {
-      "tjmHt": null,
-      "nbJours": 1,
-      "tva": null,
-      "state": "In Progress",
-      "typePresta": null,
-      "client": null,
-      "comment": null,
-      "id": 7
     }
   ],
   "clients": [

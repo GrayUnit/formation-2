@@ -11,7 +11,7 @@ export class BtnComponent implements OnInit {
   @Input() href: string;
   @Input() route: string;
   @Input() action: boolean;
-  @Input() type: string = "button";
+  @Input() typeButton: string = "button";
   @Input() disabled: boolean = false;
   @Output() clicked: EventEmitter<any> = new EventEmitter();
   constructor() { }
