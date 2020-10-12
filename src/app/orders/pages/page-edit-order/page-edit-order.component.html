@@ -1,4 +1,19 @@
 <app-form-order
   *ngIf="item$ | async as order" [order]="order"
-  (submitted)="updateOrder($event)">
+  (submitted)="openUpdateModal($event)">
 </app-form-order>
+
+<ng-template #updateOrderModal let-modal>
+  <app-modal
+    title="Modifications"
+    (dismissed)="dismiss()">
+    <div class="modal-body changes-wrapper">
+      Valider les modifications ?
+    </div>
+    <div class="modal-footer">
+      <app-btn [action]="true" (clicked)="dismiss()" label="Annuler"></app-btn>
+      <app-btn [action]="true" (clicked)="updateOrder($event)" label="Valider"></app-btn>
+    </div>
+  </app-modal>
+</ng-template>
+  

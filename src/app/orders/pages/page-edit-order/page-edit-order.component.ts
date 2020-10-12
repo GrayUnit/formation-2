@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Order } from 'src/app/core/models/order';
@@ -13,10 +14,16 @@ import { OrdersService } from '../../services/orders.service';
 export class PageEditOrderComponent implements OnInit {
 
   public item$: Observable<Order>;
+  private currentActiveModal: NgbModalRef;
+  @ViewChild('updateOrderModal') public updateModalRef: TemplateRef<any>;
+  private modalValues: Order;
+
+
   constructor(
     private router: Router,
     private currentRoute: ActivatedRoute,
-    private orderService: OrdersService
+    private orderService: OrdersService,
+    private modalService: NgbModal,
   ) { }
 
   ngOnInit(): void {
@@ -33,12 +40,22 @@ export class PageEditOrderComponent implements OnInit {
     )
   }
 
-  public updateOrder(item: Order) {
-    this.orderService.updateItem(item).subscribe(
+  public updateOrder() {
+    this.orderService.updateItem(this.modalValues).subscribe(
       (result) => {
+        this.dismiss();
         this.router.navigate(["orders"]);
       }
     );
+  }
+
+  public openUpdateModal(values) {
+    this.modalValues = values;
+    this.currentActiveModal = this.modalService.open(this.updateModalRef);
+  }
+
+  public dismiss() {
+    this.currentActiveModal.dismiss();
   }
 
 }
