@@ -12,6 +12,9 @@
         </option>
       </select>
     </td>
+    <td>
+      <app-btn [action]="true" (clicked)="goToOrders(item.id)" label="Consulter les commandes"></app-btn>
+    </td>
   </tr>
 </app-table-light>
 <div *ngIf="!clientsList">

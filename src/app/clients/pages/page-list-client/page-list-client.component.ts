@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Client } from 'src/app/core/models/client';
 import { StateClient } from '../../enums/state-client.enum';
 import { ClientsService } from '../../services/clients.service';
@@ -14,7 +15,10 @@ export class PageListClientComponent implements OnInit {
   public headersTable: string[];
   public states = Object.values(StateClient);
 
-  constructor(private clientService: ClientsService) { }
+  constructor(
+    private clientService: ClientsService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.clientService.collection.subscribe(
@@ -28,7 +32,8 @@ export class PageListClientComponent implements OnInit {
       'Nom',
       'CA',
       'Commentaire',
-      'State'
+      'State',
+      'Commandes'
     ];
     console.log("test");
   }
@@ -39,5 +44,9 @@ export class PageListClientComponent implements OnInit {
         item.state = result.state;
       }
     );
+  }
+
+  public goToOrders(clientId: number) {
+    this.router.navigate([`orders/recap/${clientId}`])
   }
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, interval, Observable, Subject } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { Order } from 'src/app/core/models/order';
 import { environment } from 'src/environments/environment';
 import { StateOrder } from '../enums/state-order.enum';
@@ -60,6 +60,16 @@ export class OrdersService {
 
   public deleteItem(item: Order): Observable<Order> {
     return this.http.delete<Order>(`${this.urlApi}orders/${item.id}`);
+  }
+
+  public getOrdersByClientName(name: string): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.urlApi}orders?client=${name}`).pipe(
+      map((col) => {
+        return col.map((item) => {
+          return new Order(item);
+        })
+      })
+    );
   }
 
 }
