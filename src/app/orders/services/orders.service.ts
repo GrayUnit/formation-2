@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, interval, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, concat, forkJoin, interval, Observable, Subject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Order } from 'src/app/core/models/order';
 import { environment } from 'src/environments/environment';
@@ -72,4 +72,18 @@ export class OrdersService {
     );
   }
 
+  public getOrders2ByClientName(name: string): Observable<Order[]> {
+    return this.http.get<Order[]>(`${this.urlApi}orders2?client=${name}`).pipe(
+      map((col) => {
+        console.log(col)
+        return col.map((item) => {
+          return new Order(item);
+        })
+      })
+    );
+  }
+
+  public getAllOrdersByClientName(name: string): Observable<[Order[], Order[]]> {
+    return forkJoin([this.getOrdersByClientName(name), this.getOrders2ByClientName(name)]);
+  }
 }

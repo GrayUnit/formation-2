@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { interval, Observable } from 'rxjs';
+import { BehaviorSubject, concat, forkJoin, interval, merge, Observable, Subject } from 'rxjs';
 import { mergeMap, switchMap } from 'rxjs/operators';
 import { ClientsService } from 'src/app/clients/services/clients.service';
 import { Order } from 'src/app/core/models/order';
@@ -14,9 +14,14 @@ import { OrdersService } from '../../services/orders.service';
 })
 export class PageRecapOrderComponent implements OnInit {
 
-  public collectionOrders$: Observable<Order[]>;
+  //public collectionOrders$: Observable<Order[]>;
   public states = Object.values(StateOrder);
   public tableHeaders: string[];
+
+  public collectionOrders: Order[];
+  public collectionOrders2: Order[];
+
+  public listCollection$: Observable<[Order[], Order[]]>;
 
   constructor(
     private orderService: OrdersService,
@@ -25,15 +30,15 @@ export class PageRecapOrderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.collectionOrders$ = this.currentRoute.paramMap.pipe(
-      switchMap((params: ParamMap) => {
-        return this.clientService.getItemById(params.get("id")).pipe(
-          switchMap((client) => {
-            return this.orderService.getOrdersByClientName(client.name);
-          })
-        )
-      })
-    );
+    // this.collectionOrders$ = this.currentRoute.paramMap.pipe(
+    //   switchMap((params: ParamMap) => {
+    //     return this.clientService.getItemById(params.get("id")).pipe(
+    //       switchMap((client) => {
+    //         return this.orderService.getOrdersByClientName(client.name);
+    //       })
+    //     )
+    //   })
+    // );
     //MERGE MAP
     // this.collectionOrders$ = this.currentRoute.paramMap.pipe(
     //   mergeMap((params: ParamMap) => {
@@ -44,6 +49,26 @@ export class PageRecapOrderComponent implements OnInit {
     //     )
     //   })
     // );
+
+    // Fork join
+    this.listCollection$ = this.currentRoute.paramMap.pipe(
+      switchMap((params: ParamMap) => {
+        return this.clientService.getItemById(params.get("id")).pipe(
+          switchMap((client) => {
+            return this.orderService.getAllOrdersByClientName(client.name);
+          })
+        )
+      })
+    );
+
+    this.listCollection$.subscribe(
+      (cols) => {
+        this.collectionOrders = cols[0];
+        this.collectionOrders2 = cols[1];
+      }
+    )
+
+ 
     this.tableHeaders = [
       "Type",
       "Client",
