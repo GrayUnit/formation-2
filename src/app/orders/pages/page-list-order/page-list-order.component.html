@@ -66,16 +66,14 @@
   <app-btn [action]="true" label="Test Action" (clicked)="testButton()"></app-btn>
 </app-template-b>
 
-<app-text>
-  <h1>Title</h1>
-  <h2>Subtitle</h2>
-  <h3>Sub Subtitle</h3>
-  <p>Ceci est un texte dans un paragraphe</p>
-</app-text>
-
 <app-text [page]="true">
   <h1>Title</h1>
   <h2>Subtitle</h2>
   <h3>Sub Subtitle</h3>
   <p>Ceci est un texte dans un paragraphe</p>
+  <ul (click) = "onClick()" #abcd>
+    <li>Click here to add li</li>
+  </ul> 
 </app-text>
+
+

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -21,7 +21,8 @@ export class PageListOrderComponent implements OnInit, OnDestroy {
 
   constructor(
     private orderService: OrdersService,
-    private router: Router) { }
+    private router: Router,
+    private renderer: Renderer2) { }
 
   ngOnInit(): void {
     this.orderService.refresh$.next(true);
@@ -71,6 +72,15 @@ export class PageListOrderComponent implements OnInit, OnDestroy {
 
   public edit(item: Order) {
     this.router.navigate(['orders', 'edit', item.id]);
+  }
+
+  @ViewChild('abcd', { static: true}) 
+  private abcd: ElementRef;
+  onClick() {
+    const li = this.renderer.createElement('li');
+    const text = this.renderer.createText('Click here to add li');
+    this.renderer.appendChild(li, text);
+    this.renderer.appendChild(this.abcd.nativeElement, li);
   }
 
 }

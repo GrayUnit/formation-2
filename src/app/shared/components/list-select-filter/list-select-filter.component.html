@@ -1,0 +1,27 @@
+<div class="widget-container">
+    <div class="widget-header">
+      <div class="search-wrapper">
+      <input [(ngModel)]="searchText" placeholder="Recherche" class="search-input">
+      <span class="filter-clear" *ngIf="searchText.length > 0" (click)="clearSearch()">X</span>
+      </div>
+      <div class="note-count note">{{getSelectedCountAsString()}} sélectionné(es)</div>
+      <div class="widget-selecter">
+        <span class="select-btn" [ngClass]="getSelectedCount() == collection.length ? 'active': ''" (click)="selectAllItems()">
+          Tous
+        </span>
+        <span class="select-btn" [ngClass]="getSelectedCount() == 0 ? 'active': ''" (click)="clearAllItems()">
+          Aucun
+        </span>
+      </div>
+    </div>
+    <div class="widget-content">
+      <div>
+        <div *ngFor="let item of collection | filterListItem : searchText" (click)="onItemClick(item)">
+          <div class="item-list" [ngClass]="{'selected': item.selected}">
+            <span class="game-text">{{item.name}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
