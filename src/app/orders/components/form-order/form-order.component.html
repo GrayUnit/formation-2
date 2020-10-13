@@ -9,13 +9,13 @@
     <div class="form-group">
       <label for="client" i18n>Client</label>
       <input formControlName="client" type="text" class="form-control" id="client">
-      <div class="alert alert-danger"
-      *ngIf="form.get('client').errors?.required && form.get('client').touched" i18n>
-        Champs requis
-      </div>
-      <div class="alert alert-danger"
-      *ngIf="form.get('client').errors?.minlength && form.get('client').touched" i18n>
-        Le nom du client doit faire au minimum 5 charactère
+      <div invalidmessage="client" class="alert alert-danger">
+        <p *invalidType="'required'" i18n>
+          Champs obligatoire
+        </p>
+        <p *invalidType="'minlength'" i18n>
+          Mini 5 char.
+        </p>
       </div>
     </div>
 
@@ -44,9 +44,6 @@
       <select formControlName="state" id="state" class="form-control">
         <option *ngFor="let state of states" [ngValue]="state">{{ state }}</option>
       </select>
-    </div>
-    <div *ngIf="form.errors?.dependency" class="alert alert-danger" i18n>
-      Veuillez entrez les champs TjmHt et Nb Jours.
     </div>
     <app-btn typeButton="submit" label="Valider" [disabled]="form.invalid"></app-btn>
 
